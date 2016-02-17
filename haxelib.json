@@ -1,0 +1,13 @@
+{
+	"name":"imagesheet",
+	"license":"MIT",
+	"tags":["spritesheet", "texturepacker"],
+	"description":"a texture atlas / spritesheet library, support texture packer format",
+	"contributors":["wighawag"],
+	"releasenote":"first version",
+	"version":"0.1.0",
+	"url":"https://github.com/wighawag/imagesheet",
+	"classPath":"Sources",
+	"dependencies":{
+	}
+}
