@@ -5,16 +5,36 @@ import kha.Image;
 import kha.Assets;
 
 class SubImage{
+	/**
+	rectangle in which the image reside in the sheet is defined by x,y,width, height
+	*/
 	public var x(default,null) : Int;
 	public var y(default,null) : Int;
 	public var width(default,null) : Int;
 	public var height(default,null) : Int;
+	
+	/**
+	if the image is trimmed
+	offsetX will represent the ammount of pixels trimmed on the left
+	offsetY will represent the ammount of pixels trimmed on the top
+	originalWidth will be be bigger than width
+	originalHeight will be be bigger than height
+	*/
 	public var offsetX(default,null) : Int;
 	public var offsetY(default,null) : Int;
 	public var originalWidth(default,null) : Int;
 	public var originalHeight(default,null) : Int;
+	
+	/* 
+	represent the pivot information provided by texturePacker, default to 0,0
+	**/
 	public var pivotX(default,null) : Float;
 	public var pivotY(default,null) : Float;
+	
+	/*
+	if true the image has been rotated to fit better in the sheet/
+	All the other values still represent the image as if not rotated
+	**/
 	public var rotated(default,null) : Bool;
 	
 	
