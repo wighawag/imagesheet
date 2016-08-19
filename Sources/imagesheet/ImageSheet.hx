@@ -74,13 +74,35 @@ class ImageSheet{
 		}
 		return new ImageSheet(subImages, image);
 	}
+
+	public static function fromSubImages(subImages : Map<String, SubImage>, image : Image) : ImageSheet{
+		return new ImageSheet(subImages,image); 
+	}
+
+	public static function fromFixedSizeTiles(image : kha.Image, w : Int, h : Int, numTiles : Int) : ImageSheet{ //TODO make numTiles optional ?
+		var subImages : Map<String, SubImage> = new Map();
+		var x : Int = 0;
+		var y : Int = 0;
+		var imgWidth = image.width;
+		var imgHeight = image.height;
+		for(i in 0...numTiles){
+			var subImage = new SubImage(x, y, w, h, 0, 0, w, h, false, 0, 0);
+			subImages.set(""+i, subImage);
+			x+=w;
+			if(x + w > imgWidth){
+				y+= h;
+				x = 0;
+			}
+		}
+		return new ImageSheet(subImages, image);
+	}
 	
 	public var image(default, null) : Image;
 	
 	inline public function getSubImage(path : String) : SubImage{
 		return subImages.get(path);
 	}
-	
+
 	private var subImages : Map<String, SubImage>;
 	private function new(subImages : Map<String, SubImage>, image : Image){
 		this.subImages = subImages;
