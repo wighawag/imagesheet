@@ -36,9 +36,25 @@ class SubImage{
 	All the other values still represent the image as if not rotated
 	**/
 	public var rotated(default,null) : Bool;
+
+	public var image(default,null) : Image;
 	
-	
-	private function new(x : Int, y : Int, width : Int, height : Int, offsetX : Int, offsetY : Int, originalWidth : Int, originalHeight : Int, rotated : Bool, pivotX : Float, pivotY : Float){
+	//TODO fix :
+	// public function draw(g : kha.graphics2.Graphics, tx : Float, ty : Float):Void{
+		
+	// 	if(rotated){
+	// 		var oldTrans = g.transformation;
+	// 		g.transformation = kha.math.FastMatrix3.rotation(-Math.PI/2).multmat(kha.math.FastMatrix3.translation(-x, -y));
+	// 		g.drawScaledSubImage(image, x, y, height, width, tx, ty, height, width);
+	// 		g.transformation = oldTrans;
+	// 	}else{
+	// 		g.drawScaledSubImage(image, x, y, width, height, tx, ty, width, height);
+	// 	}
+		
+	// }
+
+	private function new(image : Image, x : Int, y : Int, width : Int, height : Int, offsetX : Int, offsetY : Int, originalWidth : Int, originalHeight : Int, rotated : Bool, pivotX : Float, pivotY : Float){
+		this.image = image;
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -69,7 +85,7 @@ class ImageSheet{
 				pivotX = frame.pivotX;
 				pivotY = frame.pivotY;
 			}
-			var subImage = new SubImage(frame.frame.x, frame.frame.y, frame.frame.w, frame.frame.h, frame.spriteSourceSize.x, frame.spriteSourceSize.y, frame.sourceSize.w, frame.sourceSize.h,  frame.rotated, pivotX, pivotY);
+			var subImage = new SubImage(image,frame.frame.x, frame.frame.y, frame.frame.w, frame.frame.h, frame.spriteSourceSize.x, frame.spriteSourceSize.y, frame.sourceSize.w, frame.sourceSize.h,  frame.rotated, pivotX, pivotY);
 			subImages.set(frame.filename, subImage);
 		}
 		return new ImageSheet(subImages, image);
@@ -86,7 +102,7 @@ class ImageSheet{
 		var imgWidth = image.width;
 		var imgHeight = image.height;
 		for(i in 0...numTiles){
-			var subImage = new SubImage(x, y, w, h, 0, 0, w, h, false, 0, 0);
+			var subImage = new SubImage(image, x, y, w, h, 0, 0, w, h, false, 0, 0);
 			subImages.set(""+i, subImage);
 			x+=w;
 			if(x + w > imgWidth){
