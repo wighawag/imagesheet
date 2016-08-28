@@ -82,8 +82,8 @@ class ImageSheet{
 			var pivotX = 0.0;
 			var pivotY = 0.0;
 			if(Reflect.hasField(frame, "pivot")){
-				pivotX = frame.pivotX;
-				pivotY = frame.pivotY;
+				pivotX = frame.pivot.x;
+				pivotY = frame.pivot.y;
 			}
 			var subImage = new SubImage(image,frame.frame.x, frame.frame.y, frame.frame.w, frame.frame.h, frame.spriteSourceSize.x, frame.spriteSourceSize.y, frame.sourceSize.w, frame.sourceSize.h,  frame.rotated, pivotX, pivotY);
 			subImages.set(frame.filename, subImage);
