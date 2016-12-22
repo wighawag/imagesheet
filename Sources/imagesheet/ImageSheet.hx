@@ -12,6 +12,14 @@ class SubImage{
 	public var y(default,null) : Int;
 	public var width(default,null) : Int;
 	public var height(default,null) : Int;
+
+
+	/* 
+	represent the pivot in pixel in relation to the subImage width (trimmed if any), default to zero (top left corner)
+	**/
+	public var pivotX(default,null) : Float;
+	public var pivotY(default,null) : Float;
+
 	
 	/**
 	if the image is trimmed
@@ -25,11 +33,6 @@ class SubImage{
 	public var originalWidth(default,null) : Int;
 	public var originalHeight(default,null) : Int;
 	
-	/* 
-	represent the pivot information provided by texturePacker, default to 0,0
-	**/
-	public var pivotX(default,null) : Float;
-	public var pivotY(default,null) : Float;
 	
 	/*
 	if true the image has been rotated to fit better in the sheet/
@@ -37,6 +40,10 @@ class SubImage{
 	**/
 	public var rotated(default,null) : Bool;
 
+
+	/*
+	reference to the image of the sheet
+	**/
 	public var image(default,null) : Image;
 	
 	//TODO fix :
@@ -85,6 +92,8 @@ class ImageSheet{
 				pivotX = frame.pivot.x;
 				pivotY = frame.pivot.y;
 			}
+			pivotX = pivotX * frame.sourceSize.w - frame.spriteSourceSize.x;
+			pivotY = pivotY * frame.sourceSize.h - frame.spriteSourceSize.y;
 			var subImage = new SubImage(image,frame.frame.x, frame.frame.y, frame.frame.w, frame.frame.h, frame.spriteSourceSize.x, frame.spriteSourceSize.y, frame.sourceSize.w, frame.sourceSize.h,  frame.rotated, pivotX, pivotY);
 			subImages.set(frame.filename, subImage);
 		}
